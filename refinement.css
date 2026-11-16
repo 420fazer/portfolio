@@ -94,8 +94,8 @@ header a, header button { pointer-events: auto; }
 .theme-icon-moon { border-radius: 50%; mask-image: radial-gradient(circle at 75% 25%, transparent 0 7px, #000 7.5px); }
 html[data-theme="dark"] .theme-icon-moon, html[data-theme="light"] .theme-icon-sun { display: none; }
 header nav { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); min-height: 48px; font-size: var(--caption-size); }
-header.is-scrolled nav { background: var(--bg); box-shadow: 0 0 0 var(--gutter) var(--bg); }
-header nav { transition: background-color 400ms ease, box-shadow 400ms ease; }
+header.is-scrolled { mix-blend-mode: difference; }
+header.is-scrolled nav { color: #fff; }
 header nav a { padding-block: var(--space-3); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; }
 header nav a:hover { text-decoration-color: currentColor; }
 .hero, #work, .about, .profile-section {
