@@ -17,7 +17,6 @@
   --grid-gap: var(--space-4);
   --section-space: var(--space-12);
   --header-top-height: 64px;
-  --header-nav-height: 48px;
   --caption-size: 12px;
   --small-size: 14px;
   --body-size: 16px;
@@ -62,9 +61,10 @@ h1, h2, h3, p { margin: 0; }
 h1, h2, h3, .logo, .intro p { font-family: Manrope, Inter, sans-serif; }
 h1, h2, h3 { font-weight: 500; }
 h1 { font-size: var(--h1-size); line-height: 1.05; letter-spacing: -.04em; }
-.hero h1 { font-size: min(8rem, calc(var(--hero-name-size, 16vw) * .84)); }
-.hero-first-name, .hero-last-name { display: block; width: max-content; white-space: nowrap; }
+.hero h1 { font-size: clamp(40px, 9.5vw, 72px); }
+.hero-first-name, .hero-last-name { display: block; }
 .hero-first-name { font-weight: 300; }
+.hero-last-name { height: 1.1em; white-space: nowrap; }
 h2 { font-size: clamp(24px, 2vw, 28px); font-weight: 600; line-height: 1.15; letter-spacing: -.04em; text-transform: uppercase; }
 h3 { font-size: var(--h3-size); line-height: 1.2; letter-spacing: -.03em; }
 .wrap { width: calc(100% - 2 * var(--gutter)); margin-inline: auto; }
@@ -93,7 +93,7 @@ header a, header button { pointer-events: auto; }
 .theme-icon-sun { clip-path: polygon(50% 0%,60% 20%,78% 8%,79% 31%,100% 35%,85% 51%,100% 67%,78% 71%,78% 94%,59% 82%,50% 100%,40% 82%,21% 94%,22% 71%,0% 67%,15% 51%,0% 35%,21% 31%,22% 8%,40% 20%); }
 .theme-icon-moon { border-radius: 50%; mask-image: radial-gradient(circle at 75% 25%, transparent 0 7px, #000 7.5px); }
 html[data-theme="dark"] .theme-icon-moon, html[data-theme="light"] .theme-icon-sun { display: none; }
-header nav { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); min-height: var(--header-nav-height); font-size: var(--caption-size); }
+header nav { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); min-height: 48px; font-size: var(--caption-size); }
 header.is-scrolled { mix-blend-mode: difference; }
 header.is-scrolled nav { color: #fff; }
 header nav a { padding-block: var(--space-3); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; }
@@ -103,15 +103,8 @@ header nav a:hover { text-decoration-color: currentColor; }
   grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
   column-gap: var(--grid-gap);
 }
-.hero {
-  min-height: calc(100vh - var(--header-top-height) - var(--header-nav-height));
-  min-height: calc(100svh - var(--header-top-height) - var(--header-nav-height));
-  padding-block: clamp(var(--space-6), 5svh, var(--space-12));
-  grid-template-rows: 1fr auto;
-  row-gap: var(--space-6);
-}
+.hero { padding-top: var(--space-12); padding-bottom: var(--space-16); row-gap: var(--space-8); align-items: end; }
 .hero h1, .hero .intro { grid-column: 1 / -1; min-width: 0; }
-.hero h1 { align-self: center; }
 .intro p { font-size: var(--body-size); line-height: 1.5; letter-spacing: -.02em; }
 .intro-desktop { display: none; }
 .intro { max-width: 400px; align-self: end; }
@@ -216,6 +209,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
 .caption p, .profile-section > h2, .work-count, .contact-label, .experience-row p, .experience-row > span, footer { transition: color 400ms ease; }
 
 @media (min-width: 768px) {
+  .hero { padding-block: var(--section-space); row-gap: var(--space-6); }
   .intro p { font-size: var(--large-size); }
   .intro-desktop { display: block; }
   .intro-mobile { display: none; }
@@ -234,8 +228,11 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
 }
 @media (min-width: 1024px) {
   :root { --gutter: var(--space-12); --columns: 12; --grid-gap: var(--space-8); --section-space: var(--space-24); --header-top-height: 80px; }
+  .hero { padding-block: var(--space-32); }
   .about, .contact { margin-top: var(--space-32); }
   .profile-section { margin-top: var(--space-20); }
+  .hero h1 { grid-column: 1 / 8; font-size: clamp(72px, 7vw, 112px); }
+  .hero .intro { grid-column: 8 / 13; }
   .project:nth-of-type(1) { grid-column: 1 / 8; }
   .project:nth-of-type(2) { grid-column: 8 / 13; margin-top: var(--space-20); }
   .project:nth-of-type(3) { grid-column: 1 / 6; }

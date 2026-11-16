@@ -55,20 +55,7 @@ window.addEventListener('resize', updateHeaderSurface);
 updateHeaderSurface();
 const languageButton = document.getElementById('language');
 const themeButton = document.getElementById('theme');
-const heroName = document.querySelector('.hero h1');
-const heroSurname = heroName.querySelector('.hero-last-name');
 let language = 'ru';
-
-function fitHeroName() {
-  heroName.style.removeProperty('--hero-name-size');
-  const surnameWidth = heroSurname.getBoundingClientRect().width;
-  if (!surnameWidth) return;
-  const fontSize = parseFloat(getComputedStyle(heroName).fontSize);
-  const fittedSize = Math.floor(fontSize * heroName.clientWidth / surnameWidth * 100) / 100;
-  heroName.style.setProperty('--hero-name-size', `${fittedSize}px`);
-}
-window.addEventListener('resize', fitHeroName);
-document.fonts.ready.then(fitHeroName);
 
 function readPreference(key, fallback) {
   try { return localStorage.getItem(key) || fallback; }
@@ -109,7 +96,6 @@ function setLanguage(value) {
   document.querySelectorAll('[data-ru]').forEach(element => {
     element.innerHTML = element.dataset[value];
   });
-  fitHeroName();
   languageButton.textContent = value === 'ru' ? 'EN' : 'RU';
   languageButton.setAttribute('aria-label', value === 'ru' ? 'Switch to English' : 'Переключить на русский');
   document.title = value === 'ru' ? 'Никита Тихомиров — продуктовый дизайнер' : 'Nikita Tikhomirov — Product designer';
