@@ -304,7 +304,7 @@ header .header-top { border-bottom-color: transparent; }
 @media (prefers-reduced-motion: no-preference) {
   .header-top, .hero > :not(.hero-scroll), .case-hero > *,
   .case-visual:not(.scroll-reveal) {
-    animation: page-entry 480ms ease-out var(--entry-delay, 0ms) backwards;
+    animation: page-entry 880ms cubic-bezier(.35,0,.25,1) var(--entry-delay, 0ms) backwards;
   }
   .intro-label, .case-kicker { --entry-delay: 60ms; }
   .hero h1, .case-hero h1 { --entry-delay: 120ms; }
