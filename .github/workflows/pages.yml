@@ -29,8 +29,8 @@ jobs:
       - name: Assemble static sites
         run: |
           mkdir -p site/preview
-          rsync -a --exclude='.git' --exclude='.github' --exclude='README.md' --exclude='/preview/' production/ site/
-          rsync -a --exclude='.git' --exclude='.github' --exclude='README.md' development/ site/preview/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='README.md' --exclude='AGENTS.md' --exclude='/docs/' --exclude='/preview/' production/ site/
+          rsync -a --exclude='.git' --exclude='.github' --exclude='README.md' --exclude='AGENTS.md' --exclude='/docs/' development/ site/preview/
           touch site/.nojekyll
           printf 'User-agent: *\nDisallow: /portfolio/preview/\n' > site/robots.txt
       - uses: actions/configure-pages@v5
