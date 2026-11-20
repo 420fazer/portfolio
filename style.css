@@ -266,7 +266,8 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
 .case-section { display: grid; grid-template-columns: minmax(0,1fr); gap: var(--space-6); padding-block: var(--section-space); border-bottom: 1px solid var(--line); }
 .case-copy { max-width: 68ch; }
 .case-copy h3 { margin-bottom: var(--space-6); }
-.case-principles { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-8); padding-block: var(--section-space); }
+.case-principles { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: var(--space-8); margin-top: calc(var(--space-12) - var(--space-6)); }
+@media (max-width: 767px) { .case-principles { margin-top: calc(var(--space-8) - var(--space-6)); } }
 .case-principles > div { border-top: 1px solid var(--line); padding-top: var(--space-4); }
 .case-principles span { color: var(--muted); font-size: var(--caption-size); }
 .case-principles h3 { margin-block: var(--space-4); }
