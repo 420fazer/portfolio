@@ -283,6 +283,9 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
 @media (max-width: 767px) { .case-meta, .case-principles { grid-template-columns: 1fr; } .case-visual .cover { aspect-ratio: 4 / 3; } }
 
 /* Overlay navigation avoids consuming space in the first screen. */
+@media (scripting: enabled) {
+  header:not(.nav-enhanced) nav { position: absolute; opacity: 0; visibility: hidden; }
+}
 header.nav-enhanced nav { position: absolute; top: 100%; left: 0; right: 0; opacity: 0; visibility: hidden; transition: opacity 240ms ease, visibility 0s linear 240ms; }
 header.nav-enhanced:not(.is-scrolled) nav a { pointer-events: none; }
 header.nav-enhanced.is-scrolled nav { opacity: 1; visibility: visible; transition-delay: 0s; }
@@ -302,17 +305,14 @@ header .header-top { border-bottom-color: transparent; }
 
 /* Stagger the first screen in reading order, without shifting its layout. */
 @media (prefers-reduced-motion: no-preference) {
-  .header-top, .hero > :not(.hero-scroll), .case-hero > *,
+  .header-top, .hero > :not(.hero-scroll), .hero-scroll > span, .case-hero > *,
   .case-visual:not(.scroll-reveal) {
-    animation: page-entry 1600ms ease-in-out var(--entry-delay, 0ms) backwards;
+    animation: page-entry 1200ms ease-in-out var(--entry-delay, 0ms) backwards;
   }
   .intro-label, .case-kicker { --entry-delay: 100ms; }
   .hero h1, .case-hero h1 { --entry-delay: 200ms; }
   .hero .intro, .case-lead { --entry-delay: 300ms; }
-  .case-meta, .case-visual { --entry-delay: 400ms; }
-  @starting-style {
-    .hero-scroll { opacity: 0; }
-  }
+  .hero-scroll, .case-meta, .case-visual { --entry-delay: 400ms; }
   @keyframes page-entry {
     from { opacity: 0; }
     to { opacity: 1; }
