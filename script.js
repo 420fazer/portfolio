@@ -120,7 +120,7 @@ document.querySelectorAll('[data-copy]').forEach(button => {
 });
 // Arm offscreen content before it enters the viewport.
 const revealTargets = document.querySelectorAll(
-  '#work > .section-head, .project, .about, .profile-section, .contact'
+  '#work > .section-head, .project, .about, .profile-section, .contact, .case-visual, .case-section'
 );
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let revealObserver;

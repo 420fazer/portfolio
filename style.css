@@ -299,3 +299,22 @@ header.nav-enhanced nav:focus-within { opacity: 1; visibility: visible; transiti
 /* First-screen details, scoped to the homepage. */
 header .header-top { border-bottom-color: transparent; }
 .home-page.has-left-top .hero-scroll:not(:focus-visible) { opacity: 0; visibility: hidden; pointer-events: none; transition-delay: 0s, 240ms; }
+
+/* Stagger the first screen in reading order, without shifting its layout. */
+@media (prefers-reduced-motion: no-preference) {
+  .header-top, .hero > :not(.hero-scroll), .case-hero > *,
+  .case-visual:not(.scroll-reveal) {
+    animation: page-entry 480ms ease-out var(--entry-delay, 0ms) backwards;
+  }
+  .intro-label, .case-kicker { --entry-delay: 60ms; }
+  .hero h1, .case-hero h1 { --entry-delay: 120ms; }
+  .hero .intro, .case-lead { --entry-delay: 180ms; }
+  .case-meta, .case-visual { --entry-delay: 240ms; }
+  @starting-style {
+    .hero-scroll { opacity: 0; }
+  }
+  @keyframes page-entry {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
