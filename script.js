@@ -2,10 +2,9 @@ const siteHeader = document.querySelector('header');
 function updateHeaderSurface() {
   const scrolled = window.scrollY >= siteHeader.querySelector('.header-top').offsetHeight;
   siteHeader.classList.toggle('is-scrolled', scrolled);
+  siteHeader.classList.add('nav-enhanced');
   if (document.body.classList.contains('home-page')) {
-    siteHeader.classList.toggle('nav-ready', scrolled);
     document.body.classList.toggle('has-left-top', window.scrollY > 2);
-    siteHeader.classList.add('nav-enhanced');
   }
 }
 window.addEventListener('scroll', updateHeaderSurface, { passive: true });
