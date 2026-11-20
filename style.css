@@ -279,8 +279,10 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
 @media (max-width: 767px) { .case-meta, .case-principles { grid-template-columns: 1fr; } .case-visual .cover { aspect-ratio: 4 / 3; } }
 
 /* Homepage: overlay navigation avoids consuming space in the first screen. */
-.home-page header.nav-enhanced nav { position: absolute; top: 100%; left: 0; right: 0; opacity: 0; visibility: hidden; }
-.home-page header.nav-enhanced.nav-ready nav { opacity: 1; visibility: visible; }
+.home-page header.nav-enhanced nav { position: absolute; top: 100%; left: 0; right: 0; opacity: 0; visibility: hidden; transition: opacity 240ms ease, visibility 0s linear 240ms; }
+.home-page header.nav-enhanced:not(.nav-ready) nav a { pointer-events: none; }
+.home-page header.nav-enhanced.nav-ready nav { opacity: 1; visibility: visible; transition-delay: 0s; }
+.home-page header.nav-enhanced nav:focus-within { opacity: 1; visibility: visible; transition-delay: 0s; }
 .home-page:has(header.nav-enhanced) .hero { min-height: calc(100vh - var(--header-top-height)); min-height: calc(100svh - var(--header-top-height)); }
 .home-page .hero { grid-template-rows: 1fr auto auto auto 1fr auto; align-content: stretch; }
 .home-page .hero > .intro-label { grid-row: 2; }
