@@ -282,14 +282,27 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
 @media (min-width: 768px) { .case-section { grid-template-columns: 1fr 2fr; } }
 @media (max-width: 767px) { .case-meta, .case-principles { grid-template-columns: 1fr; } .case-visual .cover { aspect-ratio: 4 / 3; } }
 
-/* Overlay navigation avoids consuming space in the first screen. */
-@media (scripting: enabled) {
-  header:not(.nav-enhanced) nav { position: absolute; opacity: 0; visibility: hidden; }
+@media (width < 768px) {
+  @media (scripting: enabled) {
+    header:not(.nav-enhanced) nav { position: absolute; opacity: 0; visibility: hidden; }
+  }
+  header.nav-enhanced nav { position: absolute; top: 100%; left: 0; right: 0; opacity: 0; visibility: hidden; transition: opacity 240ms ease, visibility 0s linear 240ms; }
+  header.nav-enhanced:not(.is-scrolled) nav a { pointer-events: none; }
+  header.nav-enhanced.is-scrolled nav { opacity: 1; visibility: visible; transition-delay: 0s; }
+  header.nav-enhanced nav:focus-within { opacity: 1; visibility: visible; transition-delay: 0s; }
 }
-header.nav-enhanced nav { position: absolute; top: 100%; left: 0; right: 0; opacity: 0; visibility: hidden; transition: opacity 240ms ease, visibility 0s linear 240ms; }
-header.nav-enhanced:not(.is-scrolled) nav a { pointer-events: none; }
-header.nav-enhanced.is-scrolled nav { opacity: 1; visibility: visible; transition-delay: 0s; }
-header.nav-enhanced nav:focus-within { opacity: 1; visibility: visible; transition-delay: 0s; }
+
+@media (min-width: 768px) {
+  header { display: grid; top: 0; }
+  .header-top, header nav { grid-area: 1 / 1; }
+  header nav { justify-self: center; gap: var(--space-8); }
+  .header-top > * { transition: opacity 240ms ease, visibility 0s; }
+  header.is-scrolled .header-top > * {
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s, 240ms;
+  }
+}
 .home-page:has(header.nav-enhanced) .hero { min-height: calc(100vh - var(--header-top-height)); min-height: calc(100svh - var(--header-top-height)); }
 .home-page .hero { grid-template-rows: 1fr auto auto auto 1fr auto; align-content: stretch; }
 .home-page .hero > .intro-label { grid-row: 2; }
