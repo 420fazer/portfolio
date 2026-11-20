@@ -105,7 +105,7 @@ header nav a:hover { text-decoration-color: currentColor; }
   grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
   column-gap: var(--grid-gap);
 }
-.hero { padding-top: var(--space-12); padding-bottom: var(--space-16); row-gap: var(--space-8); align-items: end; }
+.hero { min-height: calc(100vh - var(--header-top-height) - var(--space-12)); min-height: calc(100svh - var(--header-top-height) - var(--space-12)); padding-top: var(--space-12); padding-bottom: var(--space-16); row-gap: var(--space-8); align-items: end; align-content: center; }
 .hero h1, .hero .intro { grid-column: 1 / -1; min-width: 0; }
 .intro p, .case-lead { font-size: var(--body-size); line-height: 1.5; letter-spacing: -.02em; }
 .intro-desktop { display: none; }
