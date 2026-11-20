@@ -110,13 +110,13 @@ header nav a:hover { text-decoration-color: currentColor; }
 .hero > .intro-label { margin-bottom: 0; }
 .hero .intro { justify-self: center; width: 100%; max-width: 68ch; }
 .intro p, .case-lead { font-size: var(--body-size); line-height: 1.5; letter-spacing: -.02em; }
-.hero .intro p { text-wrap: balance; }
+.hero .intro p { text-wrap: balance; min-height: 3em; }
 .intro-desktop { display: none; }
 .intro { max-width: 400px; align-self: end; }
 .intro-label { display: block; margin-bottom: var(--space-3); font-size: var(--caption-size); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
 .about > div { max-width: 68ch; }
 .about p + p { margin-top: var(--space-4); }
-.intro br { display: none; }
+.hero .intro br { display: initial; }
 #work { row-gap: var(--space-12); }
 .section-head { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: var(--space-4); }
 .work-count { font-size: var(--caption-size); color: var(--muted); }
@@ -215,8 +215,8 @@ header nav a:hover { text-decoration-color: currentColor; }
 .social-placeholders { display: flex; flex-wrap: wrap; gap: var(--space-8); position: relative; padding-top: var(--space-8); font-size: var(--small-size); }
 .social-placeholders::before { content: ''; position: absolute; top: 0; left: 0; width: 64px; height: 1px; background: var(--line); }
 footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-6); border-top: 1px solid var(--line); color: var(--muted); font-size: var(--caption-size); }
-.scroll-reveal.is-revealed { animation: reveal-content 520ms ease both; }
-@keyframes reveal-content { from { opacity: .65; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.scroll-reveal.is-revealed { animation: reveal-content 620ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes reveal-content { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 .scroll-reveal:focus-within { animation: none; }
 .caption p, .profile-section > h2, .work-count, .contact-label, .experience-row p, .experience-row > span, footer { transition: color 400ms ease; }
 
