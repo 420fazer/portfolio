@@ -1,5 +1,12 @@
 const siteHeader = document.querySelector('header');
-function updateHeaderSurface() { siteHeader.classList.toggle('is-scrolled', window.scrollY >= siteHeader.querySelector('.header-top').offsetHeight); }
+function updateHeaderSurface() {
+  const scrolled = window.scrollY >= siteHeader.querySelector('.header-top').offsetHeight;
+  siteHeader.classList.toggle('is-scrolled', scrolled);
+  if (document.body.classList.contains('home-page')) {
+    siteHeader.classList.toggle('nav-ready', scrolled);
+    siteHeader.classList.add('nav-enhanced');
+  }
+}
 window.addEventListener('scroll', updateHeaderSurface, { passive: true });
 window.addEventListener('resize', updateHeaderSurface);
 updateHeaderSurface();
