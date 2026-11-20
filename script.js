@@ -4,6 +4,7 @@ function updateHeaderSurface() {
   siteHeader.classList.toggle('is-scrolled', scrolled);
   if (document.body.classList.contains('home-page')) {
     siteHeader.classList.toggle('nav-ready', scrolled);
+    document.body.classList.toggle('has-left-top', window.scrollY > 0);
     siteHeader.classList.add('nav-enhanced');
   }
 }

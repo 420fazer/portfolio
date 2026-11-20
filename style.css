@@ -288,3 +288,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
 .home-page .hero .intro { grid-row: 4; }
 .hero-scroll { grid-column: 1 / -1; grid-row: 6; justify-self: center; display: inline-flex; align-items: center; min-height: 44px; font-size: var(--caption-size); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); text-underline-offset: 4px; }
 .hero-scroll:hover { text-decoration: underline; }
+
+/* First-screen details, scoped to the homepage. */
+.home-page .header-top { border-bottom-color: transparent; }
+.home-page.has-left-top .hero-scroll:not(:focus-visible) { visibility: hidden; }
