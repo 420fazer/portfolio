@@ -48,7 +48,7 @@ function setLanguage(value) {
   });
   languageButton.textContent = value === 'ru' ? 'EN' : 'RU';
   languageButton.setAttribute('aria-label', value === 'ru' ? 'Switch to English' : 'Переключить на русский');
-  document.title = value === 'ru' ? 'Никита Тихомиров — продуктовый дизайнер' : 'Nikita Tikhomirov — Product designer';
+  document.title = document.querySelector('title').dataset[value] || (value === 'ru' ? 'Никита Тихомиров — продуктовый дизайнер' : 'Nikita Tikhomirov — Product designer');
   updateThemeLabel();
   updateCopyFeedback();
   document.querySelector('header nav').setAttribute('aria-label', value === 'ru' ? 'Навигация' : 'Navigation');
