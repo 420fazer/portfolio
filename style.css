@@ -86,6 +86,9 @@ header a, header button { pointer-events: auto; }
   height: var(--header-top-height);
   border-bottom: 1px solid var(--line);
 }
+.case-header { top: 0; }
+.case-header.is-scrolled { color: #fff; }
+.case-back { display: inline-flex; align-items: center; gap: var(--space-2); font-size: var(--caption-size); }
 .logo { font-size: var(--h3-size); font-weight: 700; letter-spacing: -.06em; }
 .logo sup { font-size: var(--caption-size); vertical-align: top; letter-spacing: 0; }
 .tools { display: flex; align-items: center; gap: var(--space-2); }
@@ -98,8 +101,8 @@ html[data-theme="dark"] .theme-icon-moon, html[data-theme="light"] .theme-icon-s
 header nav { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); min-height: 48px; font-size: var(--caption-size); }
 header.is-scrolled { mix-blend-mode: difference; }
 header.is-scrolled nav { color: #fff; }
-header nav a { padding-block: var(--space-3); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; }
-header nav a:hover { text-decoration-color: currentColor; }
+header nav a, .case-back { padding-block: var(--space-3); text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; }
+header nav a:hover, .case-back:hover { text-decoration-color: currentColor; }
 .hero, #work, .about, .profile-section {
   display: grid;
   grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
@@ -297,7 +300,7 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
   .header-top, header nav { grid-area: 1 / 1; }
   header nav { justify-self: center; gap: var(--space-12); }
   .header-top > * { transition: opacity 240ms ease, visibility 0s; }
-  header.is-scrolled .header-top > * {
+  header.is-scrolled:not(.case-header) .header-top > * {
     opacity: 0;
     visibility: hidden;
     transition-delay: 0s, 240ms;

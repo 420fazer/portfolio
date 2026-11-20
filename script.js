@@ -59,8 +59,8 @@ function setLanguage(value) {
   document.title = document.querySelector('title').dataset[value] || (value === 'ru' ? 'Никита Тихомиров — продуктовый дизайнер' : 'Nikita Tikhomirov — Product designer');
   updateThemeLabel();
   updateCopyFeedback();
-  document.querySelector('header nav').setAttribute('aria-label', value === 'ru' ? 'Навигация' : 'Navigation');
-  document.querySelector('.logo').setAttribute('aria-label', value === 'ru' ? 'На главную' : 'Home');
+  document.querySelector('header nav')?.setAttribute('aria-label', value === 'ru' ? 'Навигация' : 'Navigation');
+  document.querySelector('.logo')?.setAttribute('aria-label', value === 'ru' ? 'На главную' : 'Home');
   savePreference('portfolio-language', value);
   updateHeaderSurface();
 }
