@@ -220,3 +220,18 @@ window.addEventListener('keydown', event => {
 window.addEventListener('resize', stopSmoothScroll);
 window.addEventListener('pagehide', stopSmoothScroll);
 reducedMotion.addEventListener('change', stopSmoothScroll);
+// Capture the selected cover before the browser switches documents.
+window.addEventListener('pageswap', event => {
+  const transition = event.viewTransition;
+  if (!transition) return;
+  const link = Array.from(document.querySelectorAll('.project-link')).find(
+    project => project.href === event.activation?.entry.url
+  );
+  const cover = link?.querySelector('.cover');
+  if (!cover || reducedMotion.matches || event.activation.navigationType !== 'push') {
+    transition.skipTransition();
+    return;
+  }
+  cover.style.viewTransitionName = 'project-cover';
+  transition.finished.finally(() => cover.style.removeProperty('view-transition-name'));
+});
