@@ -33,6 +33,13 @@ jobs:
           rsync -a --exclude='.git' --exclude='.github' --exclude='README.md' --exclude='AGENTS.md' --exclude='/docs/' development/ site/preview/
           touch site/.nojekyll
           printf 'User-agent: *\nDisallow: /portfolio/preview/\n' > site/robots.txt
+      - name: Version static assets
+        run: |
+          # Production opts in only when its own branch contains the helper.
+          if [ -f production/.github/version_assets.py ]; then
+            python3 production/.github/version_assets.py site
+          fi
+          python3 development/.github/version_assets.py site/preview
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

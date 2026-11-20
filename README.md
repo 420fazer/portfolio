@@ -23,3 +23,5 @@ Flow: демонстрационная страница projects/flow/index.html
 - [История изменений](docs/CHANGELOG.md)
 - [План развития](docs/ROADMAP.md)
 - [Правила работы](AGENTS.md)
+
+При публикации GitHub Actions добавляет к локальным CSS/JS ссылкам в HTML параметр `v` с хешем содержимого. Исходные HTML не изменяются. Production включается после переноса помощника и workflow в main.
