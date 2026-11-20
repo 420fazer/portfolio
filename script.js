@@ -4,12 +4,13 @@ function updateHeaderSurface() {
   siteHeader.classList.toggle('is-scrolled', scrolled);
   if (document.body.classList.contains('home-page')) {
     siteHeader.classList.toggle('nav-ready', scrolled);
-    document.body.classList.toggle('has-left-top', window.scrollY > 0);
+    document.body.classList.toggle('has-left-top', window.scrollY > 2);
     siteHeader.classList.add('nav-enhanced');
   }
 }
 window.addEventListener('scroll', updateHeaderSurface, { passive: true });
 window.addEventListener('resize', updateHeaderSurface);
+window.addEventListener('pageshow', updateHeaderSurface);
 updateHeaderSurface();
 const languageButton = document.getElementById('language');
 const themeButton = document.getElementById('theme');
@@ -62,6 +63,7 @@ function setLanguage(value) {
   document.querySelector('header nav').setAttribute('aria-label', value === 'ru' ? 'Навигация' : 'Navigation');
   document.querySelector('.logo').setAttribute('aria-label', value === 'ru' ? 'На главную' : 'Home');
   savePreference('portfolio-language', value);
+  updateHeaderSurface();
 }
 languageButton.addEventListener('click', () => setLanguage(language === 'ru' ? 'en' : 'ru'));
 themeButton.addEventListener('click', () => {
@@ -117,36 +119,36 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     }, 2200);
   });
 });
-// Reveal at the lower viewport edge and reverse only at that same edge.
+// Content remains visible by default; entrance motion is progressive enhancement.
 const revealTargets = document.querySelectorAll(
-  '#work > .section-head, .project, .about, .profile-section, .contact'
+  '.project, .about, .profile-section, .contact'
 );
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let revealObserver;
+const revealedTargets = new WeakSet();
 
 function configureScrollReveal() {
   revealObserver?.disconnect();
-  revealTargets.forEach(element => {
-    element.classList.remove('scroll-reveal', 'is-revealed');
-  });
+  revealTargets.forEach(element => element.classList.remove('scroll-reveal', 'is-revealed'));
   if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
-
-  const revealBoundary = window.innerHeight - 36;
-  revealTargets.forEach(element => {
-    // Set initial state before enabling transitions, including restored scroll positions.
-    element.classList.toggle('is-revealed', element.getBoundingClientRect().top < revealBoundary);
-    element.classList.add('scroll-reveal');
-  });
 
   revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      const boundary = entry.rootBounds?.bottom ?? window.innerHeight - 36;
-      // An element above the viewport stays revealed even when no longer intersecting.
-      entry.target.classList.toggle('is-revealed', entry.boundingClientRect.top < boundary);
+      if (!entry.isIntersecting) return;
+      revealedTargets.add(entry.target);
+      entry.target.classList.add('scroll-reveal', 'is-revealed');
+      revealObserver.unobserve(entry.target);
     });
-  }, { rootMargin: '0px 0px -36px 0px', threshold: 0 });
+  }, { threshold: 0 });
 
-  revealTargets.forEach(element => revealObserver.observe(element));
+  revealTargets.forEach(element => {
+    if (revealedTargets.has(element)) return;
+    if (element.getBoundingClientRect().top < window.innerHeight) {
+      revealedTargets.add(element);
+      return;
+    }
+    revealObserver.observe(element);
+  });
 }
 configureScrollReveal();
 reducedMotion.addEventListener('change', configureScrollReveal);
