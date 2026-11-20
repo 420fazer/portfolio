@@ -63,8 +63,10 @@ h1, h2, h3 { font-weight: 500; }
 h1 { font-size: var(--h1-size); line-height: 1.05; letter-spacing: -.04em; }
 .hero h1, .case-hero h1 { font-size: clamp(40px, 9.5vw, 72px); }
 .hero-first-name, .hero-last-name { display: block; }
-.hero-first-name { font-weight: 300; }
-.hero-last-name { height: 1.1em; white-space: nowrap; }
+.hero h1 { font-weight: 700; text-transform: uppercase; line-height: .92; letter-spacing: -.055em; }
+.hero-last-name { white-space: nowrap; }
+.hero h1 { font-size: clamp(32px, 9vw, 72px); }
+@media (min-width: 1200px) { .hero h1 { font-size: clamp(72px, 6.6vw, 112px); } }
 h2 { font-size: clamp(24px, 2vw, 28px); font-weight: 600; line-height: 1.15; letter-spacing: -.04em; text-transform: uppercase; }
 h3 { font-size: var(--h3-size); line-height: 1.2; letter-spacing: -.03em; }
 .wrap { width: calc(100% - 2 * var(--gutter)); margin-inline: auto; }
@@ -236,7 +238,8 @@ footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: va
   .about, .contact { margin-top: var(--space-32); }
   .profile-section { margin-top: var(--space-20); }
   .hero h1 { grid-column: 1 / 8; }
-  .hero h1, .case-hero h1 { font-size: clamp(72px, 7vw, 112px); }
+  .case-hero h1 { font-size: clamp(72px, 7vw, 112px); }
+  .hero h1 { font-size: clamp(72px, 6.6vw, 112px); }
   .hero .intro { grid-column: 8 / 13; }
   .project:nth-of-type(odd) { grid-column: 1 / 7; }
   .project:nth-of-type(even) { grid-column: 7 / 13; }
