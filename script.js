@@ -119,7 +119,7 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     }, 2200);
   });
 });
-// Animate at the lower viewport edge, but never hide content while waiting for JS.
+// Arm offscreen content before it enters the viewport.
 const revealTargets = document.querySelectorAll(
   '#work > .section-head, .project, .about, .profile-section, .contact'
 );
@@ -133,23 +133,22 @@ function configureScrollReveal() {
   revealTargets.forEach(element => element.classList.remove('scroll-reveal', 'is-revealed'));
   if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
 
-  const armed = new WeakSet();
   revealTargets.forEach(element => {
-    if (element.getBoundingClientRect().top >= window.innerHeight - 24) armed.add(element);
+    if (element.getBoundingClientRect().top >= window.innerHeight) {
+      element.classList.add('scroll-reveal');
+    }
   });
   revealObserver = new IntersectionObserver(entries => {
     if (generation !== revealGeneration) return;
     entries.forEach(entry => {
-      const element = entry.target;
-      if (entry.isIntersecting && armed.has(element)) {
-        armed.delete(element);
-        element.classList.add('scroll-reveal', 'is-revealed');
-      } else if (!entry.isIntersecting && entry.boundingClientRect.top >= window.innerHeight - 24) {
-        element.classList.remove('scroll-reveal', 'is-revealed');
-        armed.add(element);
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+      } else if (entry.boundingClientRect.top >= (entry.rootBounds?.bottom ?? window.innerHeight)) {
+        entry.target.classList.remove('is-revealed');
+        entry.target.classList.add('scroll-reveal');
       }
     });
-  }, { rootMargin: '0px 0px -24px 0px', threshold: 0 });
+  });
   revealTargets.forEach(element => revealObserver.observe(element));
 }
 configureScrollReveal();
